@@ -1,0 +1,384 @@
+---
+title: "S_van_Mesdag_Biodiversity_C+H_1"
+author: "Savanna van Mesdag"
+date: "2023-10-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+##The following is written by Savanna van Mesdag, going through the relevant coding and analyses for the biodiversity analyses for the Warton slag bank and Hodbarrow.
+
+#setwd#
+
+#To run the following code to carry out the analyses, the following packages must be installed#
+
+```{R}
+
+install.packages("iNEXT", repos = 	"http://chao.stat.nthu.edu.tw/wordpress/software_download/")
+
+install.packages('devtools', repos = "https://github.com/r-lib/devtools")
+
+install.packages('AnneChao/iNEXT', repos = 	"http://chao.stat.nthu.edu.tw/wordpress/software_download/")
+
+install.packages("ggthemes", repos = "https://github.com/jrnold/ggthemes")
+
+install.packages("vegan", repos = "	https://github.com/vegandevs/vegan")
+
+```
+##The packages also need to be loaded prior to running the analyses and producing graphs#
+```{R}
+
+library(devtools)
+library(iNEXT)
+library(ggplot2)
+library(ggthemes)
+library(vegan)
+
+```
+
+
+#Hodbarrow Data#
+
+#Loading the Hodbarrow data#
+
+```{R}
+
+urlfile1 <- 'https://raw.githubusercontent.com/Savannankvm/Biodiversity-analyses-for-Warton-and-Hodbarrow/PhD-files/Hodbarrow_Abundance_Data.csv'
+
+Hodbarrow_Nos <-read.csv(urlfile1)
+
+print(Hodbarrow_Nos)
+
+```
+
+#colSums to establish sample size for each of the quadrats.
+
+```{R}
+
+colSums(Hodbarrow_Nos)
+
+```
+
+#Setting m to sample size for Quadrat 1. This will give me observed
+#qD value that will be most representative for Quadrat and Community. Will do the same
+#for the other communities below.
+
+```{R}
+
+m <- c(213)
+
+Hodbarrow_Datam <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = m)
+
+Hodbarrow_Datam
+
+n <- c(396)
+
+Hodbarrow_Datan <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = n)
+
+Hodbarrow_Datan
+
+o <- c(617)
+
+Hodbarrow_Datao <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = o)
+
+Hodbarrow_Datao
+
+p <- c(577)
+
+Hodbarrow_Datap <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = p)
+
+Hodbarrow_Datap
+
+q <- c(433)
+
+Hodbarrow_Dataq <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = q)
+
+Hodbarrow_Dataq
+
+r <- c(106)
+
+Hodbarrow_Datar <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = r)
+
+Hodbarrow_Datar
+
+s <- c(216)
+
+Hodbarrow_Datas <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance", size = s)
+
+Hodbarrow_Datas
+
+```
+
+
+#Now to run the analysis again without specificying the size, can do this for
+#looking at the other diversity indices
+
+```{R}
+
+Hodbarrow_Data <- iNEXT(Hodbarrow_Nos, q=c(0), datatype= "abundance")
+
+print(Hodbarrow_Data)
+
+```
+
+#Running further analyses to obtain additional biodiversity indices, including sample coverage#
+
+```{R}
+
+Hodbarrow2 <- estimateD(Hodbarrow_Nos, q = c(0,1,2), datatype = "abundance", base="coverage")
+Hodbarrow2
+
+```
+
+#Running vegan analyses for Hodbarrow, to obtain species evenness indices
+
+```{R}
+
+R1 <- diversity(Hodbarrow_Nos$Quadrat_1)
+
+Revenness1 <- R1/log(specnumber(Hodbarrow_Nos$Quadrat_1))
+
+summary(Revenness1)
+
+R2 <- diversity(Hodbarrow_Nos$Quadrat_2)
+
+Revenness2 <- R2/log(specnumber(Hodbarrow_Nos$Quadrat_2))
+
+summary(Revenness2)
+
+R3 <- diversity(Hodbarrow_Nos$Quadrat_3)
+
+Revenness3 <- R3/log(specnumber(Hodbarrow_Nos$Quadrat_3))
+
+summary(Revenness3)
+
+R4 <- diversity(Hodbarrow_Nos$Quadrat_4)
+
+Revenness4 <- R4/log(specnumber(Hodbarrow_Nos$Quadrat_4))
+
+summary(Revenness4)
+
+R5 <- diversity(Hodbarrow_Nos$Quadrat_5)
+
+Revenness5 <- R5/log(specnumber(Hodbarrow_Nos$Quadrat_5))
+
+summary(Revenness5)
+
+R6 <- diversity(Hodbarrow_Nos$Quadrat_6)
+
+Revenness6 <- R6/log(specnumber(Hodbarrow_Nos$Quadrat_6))
+
+summary(Revenness6)
+
+R7 <- diversity(Hodbarrow_Nos$Quadrat_7)
+
+Revenness7 <- R7/log(specnumber(Hodbarrow_Nos$Quadrat_7))
+
+summary(Revenness7)
+
+```
+
+#Now for some data visualisation for the Hodbarrow data, including species curves graphs#
+
+```{R}
+
+Hodbarrow_Data_Graph1 <- ggiNEXT(x = Hodbarrow_Data, se=TRUE, 
+                                 facet.var= "None", grey=TRUE)
+
+Hodbarrow_Data_Graph1
+
+Hodbarrow_Data_Graph2 <- ggiNEXT(x = Hodbarrow_Data, se=TRUE, type = 1,
+                                 facet.var= "None", grey=TRUE)
+
+Hodbarrow_Data_Graph2
+
+Hodbarrow_Data_Graph3 <- ggiNEXT(x = Hodbarrow_Data, se=TRUE, type = 2,
+                                 facet.var= "None", grey=TRUE)
+
+Hodbarrow_Data_Graph3
+
+Hodbarrow_Data_Graph4 <- ggiNEXT(x = Hodbarrow_Data, se=TRUE, type = 3,
+                                 facet.var= "None", grey=TRUE)
+
+Hodbarrow_Data_Graph4
+
+```
+
+#Warton#
+
+#Loading the Warton data
+
+```{R}
+
+urlfile2 <- 'https://raw.githubusercontent.com/Savannankvm/Biodiversity-analyses-for-Warton-and-Hodbarrow/PhD-files/Warton_Abundance_Data.csv'
+
+Warton_Nos <-read.csv(urlfile2)
+
+print(Warton_Nos)
+
+```
+
+#colSums to establish sample size for each of the quadrats.
+
+```{R}
+
+colSums(Warton_Nos)
+
+```
+
+#Setting m to sample size for Quadrat 1. This will give me observed
+#qD value that will be most representative for Quadrat and Community. Will do the same
+#for the other communities below.
+
+```{R}
+
+m <- c(795)
+
+Warton_Datam <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = m)
+
+Warton_Datam
+
+n <- c(568)
+
+Warton_Datan <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = n)
+
+Warton_Datan
+
+o <- c(552)
+
+Warton_Datao <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = o)
+
+Warton_Datao
+
+p <- c(322)
+
+Warton_Datap <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = p)
+
+Warton_Datap
+
+q <- c(517)
+
+Warton_Dataq <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = q)
+
+Warton_Dataq
+
+r <- c(206)
+
+Warton_Datar <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = r)
+
+Warton_Datar
+
+s <- c(319)
+
+Warton_Datas <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = s)
+
+Warton_Datas
+
+t <- c(343)
+
+Warton_Datat <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance", size = t)
+
+Warton_Datat
+
+```
+
+
+#Now to run the analysis again without specificying the size, can do this for
+#looking at the other diversity indices
+
+```{R}
+
+Warton_Data <- iNEXT(Warton_Nos, q=c(0), datatype= "abundance")
+
+print(Warton_Data)
+
+summary(Warton_Data)
+
+```
+
+#Now to obtain additional biodiversity indices for the Warton data, including sample coverage#
+
+```{R}
+
+W1 <- diversity(Warton_Nos$Quadrat_1)
+
+Warton2 <- estimateD(Warton_Nos, q = c(0,1,2), datatype = "abundance", base="coverage")
+Warton2
+
+Wevenness1 <- W1/log(specnumber(Warton_Nos$Quadrat_1))
+
+summary(Wevenness1)
+
+W2 <- diversity(Warton_Nos$Quadrat_2)
+
+Wevenness2 <- W2/log(specnumber(Warton_Nos$Quadrat_2))
+
+summary(Wevenness2)
+
+W3 <- diversity(Warton_Nos$Quadrat_3)
+
+Wevenness3 <- W3/log(specnumber(Warton_Nos$Quadrat_3))
+
+summary(Wevenness3)
+
+W4 <- diversity(Warton_Nos$Quadrat_4)
+
+Wevenness4 <- W4/log(specnumber(Warton_Nos$Quadrat_4))
+
+summary(Wevenness4)
+
+W5 <- diversity(Warton_Nos$Quadrat_5)
+
+Wevenness5 <- W5/log(specnumber(Warton_Nos$Quadrat_5))
+
+summary(Wevenness5)
+
+W6 <- diversity(Warton_Nos$Quadrat_6)
+
+Wevenness6 <- W6/log(specnumber(Warton_Nos$Quadrat_6))
+
+summary(Wevenness6)
+
+W7 <- diversity(Warton_Nos$Quadrat_7)
+
+Wevenness7 <- W7/log(specnumber(Warton_Nos$Quadrat_7))
+
+summary(Wevenness7)
+
+W8 <-diversity(Warton_Nos$Quadrat_8)
+
+Wevenness8 <-W8/log(specnumber(Warton_Nos$Quadrat_8))
+
+summary(Wevenness8)
+
+```
+
+#Now for Warton data visualisation, including species curve visualisation#
+
+```{R}
+
+Warton_Data_Graph1 <- ggiNEXT(x = Warton_Data, se=TRUE, color.var="Order.q")
+
+Warton_Data_Graph1
+
+Warton_Data_Graph2 <- ggiNEXT(x = Warton_Data, se=TRUE, type = 1,
+                              facet.var="None", color.var="Order.q") 
+
+Warton_Data_Graph2
+
+Warton_Data_Graph3 <- ggiNEXT(x = Warton_Data, se=TRUE, type = 2,
+                              facet.var="None", color.var="Order.q") 
+
+Warton_Data_Graph3
+
+Warton_Data_Graph4 <- ggiNEXT(x = Warton_Data, se=TRUE, type = 3,
+                              facet.var="None", color.var="Order.q") 
+
+Warton_Data_Graph4
+
+```
