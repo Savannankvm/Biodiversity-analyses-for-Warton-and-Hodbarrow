@@ -1,0 +1,757 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Savanna
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+## Please modify this section of the code to change to your own directory. Make absolutely sure that you have all 
+#of the relevant associated data files in your directory as well.
+
+```{r}
+setwd("C:/Users/Savanna/Documents/1NewRDirectory")
+```
+
+#Load Carnforth or Warton Data#
+
+```{r}
+CarnforthPlantChemistry <- read.csv("CarnforthPlantChemistry.csv")
+```
+
+
+```{r}
+str(CarnforthPlantChemistry)
+```
+
+
+```{r}
+CarnforthPlantSpecies <- read.csv("CarnforthPlantSpecies.csv")
+```
+
+
+```{r}
+str(CarnforthPlantSpecies)
+```
+
+#Convert data into dataframes for analyses#
+
+```{r}
+CarnforthPlantSpecies1 <- data.frame(CarnforthPlantSpecies)
+```
+
+```{r}
+CarnforthPlantChemistry1 <- data.frame(CarnforthPlantChemistry)
+```
+
+#Now to run a series of analyses to assess Renyi biodiversity values for different concentrations of specific elements,
+#as well as different pH levels.
+
+```{r}
+CarnforthPlantChemistry1$pH <- as.factor(CarnforthPlantChemistry1$pH_level)
+```
+
+```{r}
+Carnforth.pH <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'pH',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.pH)
+```
+
+```{r}
+Carnforth.pH
+```
+
+```{r}
+CarnforthPlantChemistry1$Al2O3 <- as.factor(CarnforthPlantChemistry1$Al2O3)
+```
+
+```{r}
+Carnforth.Al2O3 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Al2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Al2O3)
+```
+
+```{r}
+Carnforth.Al2O3
+```
+
+```{r}
+CarnforthPlantChemistry1$SiO2 <- as.factor(CarnforthPlantChemistry1$SiO2)
+```
+
+```{r}
+Carnforth.SiO2 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'SiO2',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.SiO2)
+```
+
+```{r}
+Carnforth.SiO2
+```
+
+```{r}
+CarnforthPlantChemistry1$Fe2O3 <- as.factor(CarnforthPlantChemistry1$Fe2O3)
+```
+
+```{r}
+Carnforth.Fe2O3 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Fe2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Fe2O3)
+```
+
+```{r}
+Carnforth.Fe2O3
+```
+
+```{r}
+CarnforthPlantChemistry1$CaO <- as.factor(CarnforthPlantChemistry1$CaO)
+```
+
+```{r}
+Carnforth.CaO <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'CaO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.CaO)
+```
+
+```{r}
+Carnforth.CaO
+```
+
+```{r}
+CarnforthPlantChemistry1$MgO <- as.factor(CarnforthPlantChemistry1$MgO)
+```
+
+```{r}
+Carnforth.MgO <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'MgO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.MgO)
+```
+
+```{r}
+Carnforth.MgO
+```
+
+```{r}
+CarnforthPlantChemistry1$Na2O <- as.factor(CarnforthPlantChemistry1$Na2O)
+```
+
+```{r}
+Carnforth.Na2O <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Na2O',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Na2O)
+```
+
+```{r}
+Carnforth.Na2O
+```
+
+```{r}
+CarnforthPlantChemistry1$K2O <- as.factor(CarnforthPlantChemistry1$K2O)
+```
+
+```{r}
+Carnforth.K2O <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'K2O',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.K2O)
+```
+
+```{r}
+Carnforth.K2O
+```
+
+```{r}
+CarnforthPlantChemistry1$Cr2O3 <- as.factor(CarnforthPlantChemistry1$Cr2O3)
+```
+
+```{r}
+Carnforth.Cr2O3 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Cr2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Cr2O3)
+```
+
+```{r}
+Carnforth.Cr2O3
+```
+
+```{r}
+CarnforthPlantChemistry1$TiO2 <- as.factor(CarnforthPlantChemistry1$TiO2)
+```
+
+```{r}
+Carnforth.TiO2 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'TiO2',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.TiO2)
+```
+
+```{r}
+Carnforth.TiO2
+```
+
+```{r}
+CarnforthPlantChemistry1$MnO <- as.factor(CarnforthPlantChemistry1$MnO)
+```
+
+```{r}
+Carnforth.MnO <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'MnO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.MnO)
+```
+
+```{r}
+Carnforth.MnO
+```
+
+```{r}
+CarnforthPlantChemistry1$P2O5 <- as.factor(CarnforthPlantChemistry1$P2O5)
+```
+
+```{r}
+Carnforth.P2O5 <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'P2O5',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.P2O5)
+```
+
+```{r}
+Carnforth.P2O5
+```
+
+```{r}
+CarnforthPlantChemistry1$SrO <- as.factor(CarnforthPlantChemistry1$SrO)
+```
+
+```{r}
+Carnforth.SrO <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'SrO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.SrO)
+```
+
+```{r}
+Carnforth.SrO
+```
+
+```{r}
+CarnforthPlantChemistry1$BaO <- as.factor(CarnforthPlantChemistry1$BaO)
+```
+
+```{r}
+Carnforth.BaO <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'BaO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.BaO)
+```
+
+```{r}
+Carnforth.BaO
+```
+
+
+```{r}
+CarnforthPlantChemistry1$As <- as.factor(CarnforthPlantChemistry1$As)
+```
+
+```{r}
+Carnforth.As <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'As',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.As)
+```
+
+```{r}
+Carnforth.As
+```
+
+```{r}
+CarnforthPlantChemistry1$Co <- as.factor(CarnforthPlantChemistry1$Co)
+```
+
+```{r}
+Carnforth.Co <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Co',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Co)
+```
+
+```{r}
+Carnforth.Co
+```
+
+```{r}
+CarnforthPlantChemistry1$Pb <- as.factor(CarnforthPlantChemistry1$Pb)
+```
+
+```{r}
+Carnforth.Pb <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'Pb',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.Pb)
+```
+
+```{r}
+Carnforth.Pb
+```
+
+```{r}
+CarnforthPlantChemistry1$S <- as.factor(CarnforthPlantChemistry1$S)
+```
+
+```{r}
+Carnforth.S <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'S',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.S)
+```
+
+```{r}
+Carnforth.S
+```
+
+```{r}
+CarnforthPlantChemistry1$V <- as.factor(CarnforthPlantChemistry1$V)
+```
+
+```{r}
+Carnforth.V <- renyicomp(CarnforthPlantSpecies1, y=CarnforthPlantChemistry1, factor = 'V',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Carnforth.V)
+```
+
+```{r}
+Carnforth.V
+```
+
+#Loading Hodbarrow Data#
+
+```{r}
+HodbarrowPlantSpecies <- read.csv("HodbarrowPlantSpecies.csv")
+```
+
+
+```{r}
+str(HodbarrowPlantSpecies)
+```
+
+
+```{r}
+HodbarrowPlantChemistry <- read.csv("HodbarrowPlantChemistry.csv")
+```
+
+
+```{r}
+str(HodbarrowPlantChemistry)
+```
+
+#Converting data to dataframes for analyses#
+
+```{r}
+HodbarrowPlantSpecies1 <- data.frame(HodbarrowPlantSpecies)
+```
+
+
+```{r}
+HodbarrowPlantChemistry1 <- data.frame(HodbarrowPlantChemistry)
+```
+
+#Now to run a series of analyses to assess Renyi biodiversity values for different concentrations of specific elements,
+#as well as different pH levels.
+
+```{r}
+HodbarrowPlantChemistry1$pH <- as.factor(HodbarrowPlantChemistry1$pH_level)
+```
+
+
+```{r}
+Hodbarrow.pH <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'pH_level',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.pH)
+```
+
+```{r}
+Hodbarrow.pH
+```
+
+```{r}
+HodbarrowPlantChemistry1$SiO2 <- as.factor(HodbarrowPlantChemistry1$SiO2)
+```
+
+
+```{r}
+Hodbarrow.SiO2 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'SiO2',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.SiO2)
+```
+
+```{r}
+Hodbarrow.SiO2
+```
+
+```{r}
+HodbarrowPlantChemistry1$Al2O3 <- as.factor(HodbarrowPlantChemistry1$Al2O3)
+```
+
+
+```{r}
+Hodbarrow.Al2O3 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Al2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Al2O3)
+```
+
+```{r}
+Hodbarrow.Al2O3
+```
+
+```{r}
+HodbarrowPlantChemistry1$Fe2O3 <- as.factor(HodbarrowPlantChemistry1$Fe2O3)
+```
+
+
+```{r}
+Hodbarrow.Fe2O3 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Fe2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Fe2O3)
+```
+
+```{r}
+Hodbarrow.Fe2O3
+```
+
+```{r}
+HodbarrowPlantChemistry1$CaO <- as.factor(HodbarrowPlantChemistry1$CaO)
+```
+
+
+```{r}
+Hodbarrow.CaO <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'CaO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.CaO)
+```
+
+```{r}
+Hodbarrow.CaO
+```
+
+```{r}
+HodbarrowPlantChemistry1$MgO <- as.factor(HodbarrowPlantChemistry1$MgO)
+```
+
+
+```{r}
+Hodbarrow.MgO <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'MgO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.MgO)
+```
+
+```{r}
+Hodbarrow.MgO
+```
+
+```{r}
+HodbarrowPlantChemistry1$Na2O <- as.factor(HodbarrowPlantChemistry1$Na2O)
+```
+
+
+```{r}
+Hodbarrow.Na2O <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Na2O',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Na2O)
+```
+
+```{r}
+Hodbarrow.Na2O
+```
+
+```{r}
+HodbarrowPlantChemistry1$K2O <- as.factor(HodbarrowPlantChemistry1$K2O)
+```
+
+
+```{r}
+Hodbarrow.K2O <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'K2O',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.K2O)
+```
+
+```{r}
+Hodbarrow.K2O
+```
+
+```{r}
+HodbarrowPlantChemistry1$Cr2O3 <- as.factor(HodbarrowPlantChemistry1$Cr2O3)
+```
+
+
+```{r}
+Hodbarrow.Cr2O3 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Cr2O3',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Cr2O3)
+```
+
+```{r}
+Hodbarrow.Cr2O3
+```
+
+```{r}
+HodbarrowPlantChemistry1$TiO2 <- as.factor(HodbarrowPlantChemistry1$TiO2)
+```
+
+
+```{r}
+Hodbarrow.TiO2 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'TiO2',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.TiO2)
+```
+
+```{r}
+Hodbarrow.TiO2
+```
+
+```{r}
+HodbarrowPlantChemistry1$MnO <- as.factor(HodbarrowPlantChemistry1$MnO)
+```
+
+
+```{r}
+Hodbarrow.MnO <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'MnO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.MnO)
+```
+
+```{r}
+Hodbarrow.MnO
+```
+
+```{r}
+HodbarrowPlantChemistry1$P2O5 <- as.factor(HodbarrowPlantChemistry1$P2O5)
+```
+
+
+```{r}
+Hodbarrow.P2O5 <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'P2O5',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.P2O5)
+```
+
+```{r}
+Hodbarrow.P2O5
+```
+
+```{r}
+HodbarrowPlantChemistry1$SrO <- as.factor(HodbarrowPlantChemistry1$SrO)
+```
+
+
+```{r}
+Hodbarrow.SrO <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'SrO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.SrO)
+```
+
+```{r}
+Hodbarrow.SrO
+```
+
+```{r}
+HodbarrowPlantChemistry1$BaO <- as.factor(HodbarrowPlantChemistry1$BaO)
+```
+
+
+```{r}
+Hodbarrow.BaO <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'BaO',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.BaO)
+```
+
+```{r}
+Hodbarrow.BaO
+```
+
+```{r}
+HodbarrowPlantChemistry1$As <- as.factor(HodbarrowPlantChemistry1$As)
+```
+
+
+```{r}
+Hodbarrow.As <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'As',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.As)
+```
+
+```{r}
+Hodbarrow.As
+```
+
+```{r}
+HodbarrowPlantChemistry1$Co <- as.factor(HodbarrowPlantChemistry1$Co)
+```
+
+
+```{r}
+Hodbarrow.Co <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Co',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Co)
+```
+
+```{r}
+Hodbarrow.Co
+```
+
+```{r}
+HodbarrowPlantChemistry1$Pb <- as.factor(HodbarrowPlantChemistry1$Pb)
+```
+
+
+```{r}
+Hodbarrow.Pb <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'Pb',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.Pb)
+```
+
+```{r}
+Hodbarrow.Pb
+```
+
+```{r}
+HodbarrowPlantChemistry1$S <- as.factor(HodbarrowPlantChemistry1$S)
+```
+
+
+```{r}
+Hodbarrow.S <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'S',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.S)
+```
+
+```{r}
+Hodbarrow.S
+```
+
+```{r}
+HodbarrowPlantChemistry1$V <- as.factor(HodbarrowPlantChemistry1$V)
+```
+
+
+```{r}
+Hodbarrow.V <- renyicomp(HodbarrowPlantSpecies1, y=HodbarrowPlantChemistry1, factor = 'V',
+scales=c(0, 0.25, 0.5, 1, 2, 4, 8, Inf), permutations=100, plotit=F)
+```
+
+```{r}
+summary(Hodbarrow.V)
+```
+
+```{r}
+Hodbarrow.V
+```
